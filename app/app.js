@@ -1,13 +1,21 @@
-var express = require('express')
+require('dotenv').config();
+require('./database');
 
-var app = express()
+var express = require('express');
+var mongoose = require('mongoose');
 
-app.use(express.static('static'))
+var app = express();
 
-app.listen(5000, function () {
-    console.log("app.js Started!")
-})
+app.use(express.static('static'));
+
+app.listen(process.env.SERVER_PORT, function () {
+    console.log("app.js Started!");
+});
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + "/static/test_main.html")
-})
+    res.sendFile(__dirname + "/static/test_main.html");
+});
+
+app.get((req, res) => {
+    res.status(404).send('Not Founds');
+});
