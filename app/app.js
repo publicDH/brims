@@ -12,10 +12,10 @@ app.listen(process.env.SERVER_PORT, function () {
     console.log("app.js Started!");
 });
 
-app.get('/', function (req, res) {
+app.get('/api', function (req, res) {
     res.sendFile(__dirname + "/static/test_main.html");
 });
 
-app.get((req, res) => {
-    res.status(404).send('Not Founds');
+app.use(function (req, res, next) {
+    res.status(404).send('404 NOT FOUND!');
 });
